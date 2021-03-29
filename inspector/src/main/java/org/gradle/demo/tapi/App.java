@@ -65,6 +65,10 @@ public class App {
                     .forEach(line -> {
                         String repl = line.replace("%%PLUGIN_JAR%%", pluginJar.getAbsolutePath())
                                 .replace("%%MODEL_JAR%%", modelJar.getAbsolutePath());
+                        // fix paths if we're on Windows
+                        if (File.separatorChar=='\\') {
+                            repl = repl.replace('\\', '/');
+                        }
                         sb.append(repl)
                                 .append("\n");
                     });
