@@ -31,5 +31,5 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClassName = "org.gradle.demo.tapi.App"
+    mainClass.set("org.gradle.demo.tapi.App")
 }
