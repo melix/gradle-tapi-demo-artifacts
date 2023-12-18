@@ -15,10 +15,10 @@
  */
 package org.gradle.demo.tapi;
 
+import org.gradle.demo.model.AllGavCoordinates;
 import org.gradle.demo.model.OutgoingArtifactsModel;
 import org.gradle.demo.plugin.Beacon;
 import org.gradle.tooling.GradleConnector;
-import org.gradle.tooling.ModelBuilder;
 import org.gradle.tooling.ProjectConnection;
 
 import java.io.BufferedReader;
@@ -40,11 +40,11 @@ public class App {
         ProjectConnection connection = null;
         try {
             connection = connector.connect();
-            ModelBuilder<OutgoingArtifactsModel> customModelBuilder = connection.model(OutgoingArtifactsModel.class);
+            var customModelBuilder = connection.model(AllGavCoordinates.class);
             customModelBuilder.withArguments("--init-script", copyInitScript().getAbsolutePath());
-            OutgoingArtifactsModel model = customModelBuilder.get();
-            for (File artifact : model.getArtifacts()) {
-                System.out.println("artifact = " + artifact);
+            var model = customModelBuilder.get();
+            for (var gav : model.coordinates()) {
+                System.out.println("gav = " + gav);
             }
         } finally {
             if (connection != null) {

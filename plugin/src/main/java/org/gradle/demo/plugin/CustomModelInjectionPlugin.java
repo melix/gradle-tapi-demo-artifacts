@@ -20,6 +20,7 @@ public class CustomModelInjectionPlugin implements Plugin<Project> {
 
     public void apply(Project project) {
         if (project == project.getRootProject()) {
+            registry.register(new GavCoordinatesModelBuilder());
             registry.register(new OutgoingArtifactsModelBuilder());
         }
     }
